@@ -4,7 +4,7 @@ mongoose.Promise = global.Promise;
 mongoose.set("strictQuery", false);
 
 export class Database {
-    dbUri = "mongodb+srv://admin:Utm123@cluster0.rgdx2sf.mongodb.net/?retryWrites=true&w=majority";
+   
     connection = mongoose.connection;
 
     constructor() {

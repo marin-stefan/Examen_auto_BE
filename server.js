@@ -1,4 +1,5 @@
-import { Database } from "./dbConnection";
+
+import { Database } from "./dbConnection.js";
 import express from "express";
 import path from "path";
 import cors from "cors";
