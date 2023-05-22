@@ -4,7 +4,7 @@ mongoose.Promise = global.Promise;
 mongoose.set("strictQuery", false);
 
 export class Database {
-   
+    dbUri = process.env.MONGO_URI ;
     connection = mongoose.connection;
 
     constructor() {

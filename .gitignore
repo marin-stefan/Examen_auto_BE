@@ -1,0 +1,10 @@
+node_modules/
+dist
+
+Thumbs.db
+
+*.app
+*.exe
+*.war
+
+*.env
