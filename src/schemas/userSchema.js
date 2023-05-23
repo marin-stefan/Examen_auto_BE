@@ -60,6 +60,7 @@ userSchema.virtual('type', {
     foreignField: '_id',
     justOne: true
 });
+
 const User = mongoose.model('User', userSchema);
 
 export default User

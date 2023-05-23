@@ -10,8 +10,9 @@ import { dirname } from "path";
 
 //routes
 // import xxxRoutes from "./src/routes/xxxRoutes.js"
-//asasas
-//
+import UserRoutes from "./src/routes/userRoutes.js"
+import RoleRoutes from "./src/routes/roleRoutes.js"
+
 
 
 const app = express();
@@ -26,10 +27,12 @@ let PORT = process.env.PORT || 8080;
 
 const db = new Database();
 db.connect();
-
-//
+ 
 // app.user('/xxx', xxxRoyutes)
-//
+app.use('/users', UserRoutes);
+
+app.use('/roles', RoleRoutes);
+
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);

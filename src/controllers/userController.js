@@ -1,8 +1,9 @@
-import User from "../schemas/userSchema";
+import User from "../schemas/userSchema.js";
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
 import jsonwebtoken from "jsonwebtoken";
 import HttpStatuses from "../enums/httpStatusesEnum.js";
+import logger from "../services/logger.js";
 
 
 const UserController = {
@@ -28,7 +29,7 @@ const UserController = {
                 const token = jsonwebtoken.sign(
                     { user: response },
                     jwtKey,
-                    { algoritm: 'HS256' }
+                    { algorithm: 'HS256' }
                 )
 
                 return res.status(HttpStatuses.Ok).json({ token: token })
@@ -36,7 +37,24 @@ const UserController = {
             logger.error(error.message);
             res.status(HttpStatuses.ServerError).json({message: error.message})
         }
+    },
+
+    create: (req, res) => {
+        const userInputs = req.body;
+
+        userInputs._id = new mongoose.Types.ObjectId();
+
+        const newUser = new User(userInputs);
+        newUser.save().then((user) => {
+            res.status(HttpStatuses.Created).send({ user: user, success: true })
+        }).catch(error => {
+            logger.error(error.message);
+            res.status(HttpStatuses.ServerError).json({ message: error.message })
+        })
+        
     }
+
+
 }
 
 export default UserController;
