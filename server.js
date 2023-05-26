@@ -9,9 +9,9 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 
 //routes
-// import xxxRoutes from "./src/routes/xxxRoutes.js"
 import UserRoutes from "./src/routes/userRoutes.js"
 import RoleRoutes from "./src/routes/roleRoutes.js"
+import UsersRoutes from "./src/routes/usersRoutes.js"
 
 
 
@@ -28,10 +28,12 @@ let PORT = process.env.PORT || 8080;
 const db = new Database();
 db.connect();
  
-// app.user('/xxx', xxxRoyutes)
-app.use('/users', UserRoutes);
+
+app.use('/user', UserRoutes);
 
 app.use('/roles', RoleRoutes);
+
+app.use('/users', UsersRoutes);
 
 
 const __filename = fileURLToPath(import.meta.url);

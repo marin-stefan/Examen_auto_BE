@@ -1,4 +1,5 @@
 import HttpStatuses from "../enums/httpStatusesEnum.js";
+import jwt from "jsonwebtoken";
 
 const config = process.env
 

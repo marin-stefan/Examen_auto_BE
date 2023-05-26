@@ -7,56 +7,56 @@ const userValidator = {
         return [
             check('firstName')
                 .exists()
-                .withMessage('Numele este necesar')
+                .withMessage('Firstname is required')
                 .trim()
                 .notEmpty()
                 .isLength({min: 2, max: 15})
-                .withMessage('Numele trebuie sa aiba minim 2 caractere sau maxim 15 caractere.'),
+                .withMessage('Firstname`s length must be between 2 and 15 characters long.'),
 
             check('lastName',)
                 .exists()
-                .withMessage('Prenumele este necesar')
+                .withMessage('Lastname is required')
                 .trim()
                 .isLength({min: 2, max: 15})
-                .withMessage('Prenumele trebuie sa aiba minim 2 caractere sau maxim 15 caractere.'),
+                .withMessage('Latstname`s length must be between 2 and 15 characters long.'),
 
             check('email',)
                 .exists()
-                .withMessage('Adresa de email este necesara')
+                .withMessage('Email is required')
                 .isEmail()
-                .withMessage('Adresa de email este invalida.')
+                .withMessage('Email is not valid.')
                 .custom(async email => {
                     await userSchema.findOne({ email: email })
                         .then(user => {
                             if (user !== null) return Promise.reject();
                         }) 
                 })
-                .withMessage('Adresa de email deja folosita'),
+                .withMessage('Email already used'),
 
             check('password',)
                 .exists()
-                .withMessage('Parola este necesara')
+                .withMessage('Password is required')
                 .trim()
                 .isLength({min: 8})
-                .withMessage('Parola trebuie sa aiba minim 8 caractere.'),
+                .withMessage('Password must be at least 8 characters long.'),
 
             check('username',)
                 .exists()
-                .withMessage('Alias utilizator este necesar')
+                .withMessage('Username is required')
                 .trim()
                 .isLength({min: 4, max: 15})
-                .withMessage('Alias utilizator trebuie sa aiba minim 4 caractere sau maxim 15 caractere.')
+                .withMessage('Usertname`s length must be between 4 and 15 characters long.')
                 .custom(async username => {
                     await userSchema.findOne({ username: username })
                         .then(user => {
                             if (user !== null) return Promise.reject();
                         })
                 })
-                .withMessage('Acest alias utilizator este deja folosit'),
+                .withMessage('Username already used'),
 
             check('roleId')
                 .exists()
-                .withMessage('Id tip utilizator este necesar')
+                .withMessage('RoleId is required')
                 .trim()
                 .custom(async role => {
                     await roleSchema.find({ name: role })
@@ -64,7 +64,7 @@ const userValidator = {
                             return roleId === null;
                         })
                 })
-                .withMessage('Acest Id tip utilizator nu exista')
+                .withMessage('This roleId does not exist')
         ]
     },
 
@@ -74,25 +74,25 @@ const userValidator = {
                 .optional()
                 .trim()
                 .notEmpty()
-                .withMessage('Numele nu poate fi gol')
+                .withMessage('FirstName can not be empty')
                 .isLength({min: 2, max: 15})
-                .withMessage('Numele trebuie sa aiba minim 2 caractere sau maxim 15 caractere.'),
+                .withMessage('Firstname`s length must be between 2 and 15 characters long.'),
 
             check('lastName',)
                 .optional()
                 .trim()
                 .notEmpty()
-                .withMessage('Prenumele nu poate fi gol')
+                .withMessage('Lastname can not be empty')
                 .isLength({min: 2, max: 15})
-                .withMessage('Prenumele trebuie sa aiba minim 2 caractere sau maxim 15 caractere.'),
+                .withMessage('Lastname`s length must be between 2 and 15 characters long.'),
 
             check('email',)
                 .optional()
                 .trim()
                 .notEmpty()
-                .withMessage('Adresa de email nu poate fi goala')
+                .withMessage('Email can not be empty')
                 .isEmail()
-                .withMessage('Adresa de email este invalida.'),
+                .withMessage('Email is invalid.'),
 
             check('password')
                 .optional()
@@ -102,29 +102,29 @@ const userValidator = {
                 .optional()
                 .trim()
                 .notEmpty()
-                .withMessage('Alias utilizator nu poate fi gol')
+                .withMessage('Username can not be empty')
                 .isLength({min: 4, max: 15})
-                .withMessage('Alias utilizator trebuie sa aiba minim 4 caractere sau maxim 15 caractere.')
+                .withMessage('Username`s length must be between 4 and 15 characters long.')
                 .custom(async username => {
                     await userSchema.find({ username: username })
                         .then(user => {
                             return user === null;
                         })
                 })
-                .withMessage('Alias utilizator este deja folosit'),
+                .withMessage('Username is already used'),
 
             check('roleId')
                 .optional()
                 .trim()
                 .notEmpty()
-                .withMessage('Id tip utilizator este necesar')
+                .withMessage('RoleId is required')
                 .custom(async role => {
                     await roleSchema.find({ name: role })
                         .then(roleId => {
                             return roleId === null;
                         })
                 })
-                .withMessage('Acest Id tip utilizator nu exista')
+                .withMessage('This roleId does not exist')
         ]
     },
 
@@ -132,18 +132,18 @@ const userValidator = {
         return [
             check('username')
                 .exists()
-                .withMessage('Alias utilizator este necesar')
+                .withMessage('Username is required')
                 .trim()
                 .notEmpty()
-                .withMessage('Alias utilizator nu poate fi gol')
+                .withMessage('Username can not be empty')
                 .escape(),
                 
             check('password')
                 .exists()
-                .withMessage('Parola este necesara')
+                .withMessage('Password is required')
                 .trim()
                 .notEmpty()
-                .withMessage('Parola nu poate fi goala')
+                .withMessage('Password can not be empty')
                 .escape()
         ]
     }

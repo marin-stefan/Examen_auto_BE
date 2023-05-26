@@ -23,8 +23,6 @@ const UserController = {
                     name: user.firstName,
                 }
 
-                // if (response.role === )
-
                 const jwtKey = process.env.JWT_SECRET_KEY || 'marin_licenta_secret'
                 const token = jsonwebtoken.sign(
                     { user: response },
@@ -51,9 +49,28 @@ const UserController = {
             logger.error(error.message);
             res.status(HttpStatuses.ServerError).json({ message: error.message })
         })
+    },
+
+    getUserById: async (req, res) => {
+        try {
+            let user = await User.findById(req.params.id);
+            if (null == user) {
+                res.status(HttpStatuses.NotFound).send(`User with ${req.params.id} was not found`)
+            }
+            res.status(HttpStatuses.Ok).json(user);
+        } catch (error) {
+            logger.error(error.message);
+            res.status(HttpStatuses.ServerError).json({ message: error.message });
+        }
+    },
+
+    updateUser: async (req, res) => {
         
     }
 
+
+
+    //facem si edituser
 
 }
 
