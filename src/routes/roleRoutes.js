@@ -11,8 +11,4 @@ app.post('/get-role-by-name', isAuth, roleValidator.getNameRequest(), validate, 
     await RoleController.getRoleByName(req, res)
 })
 
-// app.post('/get-role-by-name', async (req, res) => {
-//     await RoleController.getRoleByName(req, res)
-// })
-
 export default app

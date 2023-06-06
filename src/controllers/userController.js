@@ -65,12 +65,71 @@ const UserController = {
     },
 
     updateUser: async (req, res) => {
-        
-    }
+
+       try {
+            const filter = { _id: req.body._id };
+            const update = 
+                {
+                    firstName: req.body.firstName,
+                    lastName: req.body.lastName,
+                    email: req.body.email,
+                    username: req.body.username,
+                };
+
+            if (req.body.password) {
+                update['password'] = req.body.password
+            }
+            
+            let user = await User.findOneAndUpdate(filter, update)
+            
+            res.status(HttpStatuses.Created).send({ success: true });
+       } catch (error) {
+            logger.error(error.message);
+            res.status(HttpStatuses.ServerError).json({ message: error.message })
+       }
+    },
+
+    getUserStatsById: async (req, res) => {
+        try {
+            let user = await User.findById(req.params.id);
+            if (null == user) {
+                res.status(HttpStatuses.NotFound).send(`User with ${req.params.id} was not found`)
+            }
+
+            const stats = [
+                {
+                  title: "Examene sustinute",
+                  additional: "Total examene sustinute in platforma",
+                  count: user.totalExams,
+                },
+                {
+                  title: "Examene promovate",
+                  additional: "Total examene promovate din cele sustinute",
+                  count: user.totalPassedExams,
+                  percentage: ((user.totalPassedExams / user.totalExams) * 100).toFixed(2) | 0,
+                },
+                {
+                  title: "Punctaj mediu obtinut",
+                  additional: "Media punctaj obtinut in platforma",
+                  count: (26 - (((26 * user.totalExams) - (user.correctAnswers)) / user.totalExams)).toFixed(2) | 0,
+                },
+                {
+                  title: "Total raspunsuri corecte ",
+                  additional: "Bazat pe toate examenele sustinute",
+                  count: user.correctAnswers,
+                  percentage: ((user.correctAnswers / (user.totalExams * 26)) * 100).toFixed(2) | 0,
+                },
+              ]
+
+            res.status(HttpStatuses.Ok).json(stats);
+
+        } catch (error) {
+            logger.error(error.message);
+            res.status(HttpStatuses.ServerError).json({ message: error.message });
+        }
+    },
 
 
-
-    //facem si edituser
 
 }
 

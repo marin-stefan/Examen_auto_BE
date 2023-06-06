@@ -16,7 +16,7 @@ const UsersController = {
             return res.status(HttpStatuses.Ok).json(completeResponse)
         } catch (error) {
             logger.error(error.message);
-            res.status(HttpStatuses.ServerError).json({ message: 'plm' })
+            res.status(HttpStatuses.ServerError).json({ message: error.message })
         }
     }
 }

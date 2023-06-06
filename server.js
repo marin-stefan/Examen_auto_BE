@@ -9,9 +9,10 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 
 //routes
-import UserRoutes from "./src/routes/userRoutes.js"
-import RoleRoutes from "./src/routes/roleRoutes.js"
-import UsersRoutes from "./src/routes/usersRoutes.js"
+import UserRoutes from "./src/routes/userRoutes.js";
+import RoleRoutes from "./src/routes/roleRoutes.js";
+import UsersRoutes from "./src/routes/usersRoutes.js";
+import QuestionRoutes from "./src/routes/questionRoutes.js";
 
 
 
@@ -34,6 +35,8 @@ app.use('/user', UserRoutes);
 app.use('/roles', RoleRoutes);
 
 app.use('/users', UsersRoutes);
+
+app.use('/questions', QuestionRoutes);
 
 
 const __filename = fileURLToPath(import.meta.url);

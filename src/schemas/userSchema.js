@@ -41,6 +41,19 @@ const userSchema = mongoose.Schema({
             ref: roleSchema,
             required: [true, "Role id is required"],
         },
+        totalExams: {
+            type: Number,
+            maxLength: 4
+        },
+        totalPassedExams: {
+            type: Number,
+            maxLength: 4
+        },
+        correctAnswers: {
+            type: Number,
+            maxLength: 8
+        },
+
     },
     {
         toJSON: { virtuals: true },
@@ -48,6 +61,10 @@ const userSchema = mongoose.Schema({
         timeStamps: true         
     }
 )
+
+
+
+
 
 userSchema.plugin(bcrypt, {
     fields: ['password'],
