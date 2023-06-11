@@ -65,22 +65,26 @@ const UserController = {
     },
 
     updateUser: async (req, res) => {
-
        try {
             const filter = { _id: req.body._id };
-            const update = 
-                {
-                    firstName: req.body.firstName,
-                    lastName: req.body.lastName,
-                    email: req.body.email,
-                    username: req.body.username,
-                };
+            let user = await User.findById(req.body._id);
+            const updates = {};
 
-            if (req.body.password) {
-                update['password'] = req.body.password
-            }
+            const options = ['firstName', 'lastName', 'email', 'username', 'password'];
+            options.forEach(value => {
+                if (req.body[value]) {
+                    updates[value] = req.body[value];
+                }
+            });
+
+            const stats = ['totalExams', 'totalPassedExams', 'correctAnswers', 'wrongAnswers'];
+            stats.forEach(value => {
+                if (req.body[value]) {
+                    updates[value] = user[value] + req.body[value]
+                }
+            })
             
-            let user = await User.findOneAndUpdate(filter, update)
+            let updatedUser = await User.findOneAndUpdate(filter, updates)
             
             res.status(HttpStatuses.Created).send({ success: true });
        } catch (error) {
@@ -98,29 +102,29 @@ const UserController = {
 
             const stats = [
                 {
-                  title: "Examene sustinute",
-                  additional: "Total examene sustinute in platforma",
+                  title: "Examene susţinute",
+                  additional: "Total examene susţinute în platformă",
                   count: user.totalExams,
                 },
                 {
                   title: "Examene promovate",
-                  additional: "Total examene promovate din cele sustinute",
+                  additional: "Total examene promovate din cele susţinute",
                   count: user.totalPassedExams,
-                  percentage: ((user.totalPassedExams / user.totalExams) * 100).toFixed(2) | 0,
+                  percentage: ((user.totalPassedExams / user.totalExams) * 100).toFixed(2),
                 },
                 {
-                  title: "Punctaj mediu obtinut",
-                  additional: "Media punctaj obtinut in platforma",
-                  count: (26 - (((26 * user.totalExams) - (user.correctAnswers)) / user.totalExams)).toFixed(2) | 0,
+                  title: "Punctaj mediu obţinut",
+                  additional: "Media punctaj obţinut in platformă",
+                  count: (user.correctAnswers / user.totalExams).toFixed(2),
                 },
                 {
-                  title: "Total raspunsuri corecte ",
-                  additional: "Bazat pe toate examenele sustinute",
+                  title: "Total răspunsuri corecte ",
+                  additional: "Bazat pe toate examenele susţinute",
                   count: user.correctAnswers,
-                  percentage: ((user.correctAnswers / (user.totalExams * 26)) * 100).toFixed(2) | 0,
+                  percentage: ((user.correctAnswers / (user.correctAnswers + user.wrongAnswers)) * 100).toFixed(2),
                 },
               ]
-
+            
             res.status(HttpStatuses.Ok).json(stats);
 
         } catch (error) {

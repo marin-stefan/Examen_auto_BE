@@ -21,4 +21,4 @@ const RoleController = {
     }
 }
 
-export default RoleController
+export default RoleController;

@@ -26,6 +26,8 @@ dotenv.config();
 
 let PORT = process.env.PORT || 8080;
 
+app.use('/uploads', express.static('uploads'));
+
 const db = new Database();
 db.connect();
  
@@ -47,4 +49,4 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '/static-app/index.html'));
 })
 
-app.listen(PORT, () => console.log(`Aplicatia Backend asculta pe http://localhost:${PORT}`))
+app.listen(PORT, () => console.log(`Aplicaţia Back-End ascultă pe http://localhost:${PORT}`))

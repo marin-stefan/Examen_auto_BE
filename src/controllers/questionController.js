@@ -21,12 +21,11 @@ const QuestionController = {
     },
 
     search: async (req, res) => {
-        let query = {}
-        // let completeResponse = {};
+        let query = {};
+        
         try {
             let questions = await Question.find(query, {__v: 0})
 
-            // completeResponse['questions'] = questions
             return res.status(HttpStatuses.Ok).json(questions)
         } catch (error) {
             logger.error(error.message);

@@ -10,7 +10,7 @@ export class Database {
     constructor() {
         try {
             this.connection 
-                .on('connected', console.info.bind(console, 'Connectat la Baza de Date'))
+                .on('connected', console.info.bind(console, 'Conectat la Baza de Date'))
                 .on('error', console.error.bind(console, 'Eroare conexiune: MongoDB' ))
         } catch (error) {
             console.error(error)

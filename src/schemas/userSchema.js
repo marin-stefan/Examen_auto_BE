@@ -53,6 +53,10 @@ const userSchema = mongoose.Schema({
             type: Number,
             maxLength: 8
         },
+        wrongAnswers: {
+            type: Number,
+            maxLength: 8
+        }
 
     },
     {

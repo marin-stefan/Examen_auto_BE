@@ -11,7 +11,7 @@ const roleValidator = {
                 .notEmpty()
                 .withMessage('Name can not be empty')
                 .isIn([ UserRolesEnum.Admin, UserRolesEnum.Consumer ])
-                .withMessage('This rola name does not exist.')
+                .withMessage('This role name does not exist.')
                 .escape(),
         ]
     }
