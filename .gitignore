@@ -7,7 +7,7 @@ Thumbs.db
 *.exe
 *.war
 
-# *.env
+*.env
 
 # Logs
 logs
