@@ -10,12 +10,15 @@ const UserController = {
     
     login: async (req, res) => {
         try {
-            let user = await User.findOne({username: req.body.username})
-                .populate('type', {_id: 0, id: 0});
-                if (!user) return res.status(HttpStatuses.Unauthorized).send('Invalid username or password')
+            let user = await User.findOne({username: req.body.username}).populate('type', {_id: 0, id: 0});
+                if (!user) {
+                    return res.status(HttpStatuses.Unauthorized).send('Invalid username or password')
+                }
 
                 const validPassword = await bcrypt.compare(req.body.password, user.password);
-                if (!validPassword) return res.status(HttpStatuses.Unauthorized).send('Invalid username or password')
+                if (!validPassword) {
+                    return res.status(HttpStatuses.Unauthorized).send('Invalid username or password')
+                }
 
                 let response = {
                     id: user._id,
@@ -39,10 +42,9 @@ const UserController = {
 
     create: (req, res) => {
         const userInputs = req.body;
-
         userInputs._id = new mongoose.Types.ObjectId();
-
         const newUser = new User(userInputs);
+
         newUser.save().then((user) => {
             res.status(HttpStatuses.Created).send({ user: user, success: true })
         }).catch(error => {
@@ -126,14 +128,11 @@ const UserController = {
               ]
             
             res.status(HttpStatuses.Ok).json(stats);
-
         } catch (error) {
             logger.error(error.message);
             res.status(HttpStatuses.ServerError).json({ message: error.message });
         }
     },
-
-
 
 }
 

@@ -11,4 +11,4 @@ const HttpStatuses = {
     ServerError: 500
 };
 
-export default HttpStatuses
+export default HttpStatuses;

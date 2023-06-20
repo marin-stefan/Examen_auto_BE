@@ -17,4 +17,4 @@ const usersValidator = {
 }
 
 
-export default usersValidator
+export default usersValidator;

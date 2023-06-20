@@ -9,6 +9,7 @@ const roleSchema = mongoose.Schema({
             required: true
         },
     },
+    
     {
         timestamps: true,
         toJson: { virtuals: true },
@@ -18,4 +19,4 @@ const roleSchema = mongoose.Schema({
 
 const Role = mongoose.model('Role', roleSchema);
 
-export default Role
+export default Role;

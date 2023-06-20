@@ -28,4 +28,4 @@ const questionSchema = mongoose.Schema({
 
 const Question = mongoose.model('Question', questionSchema);
 
-export default Question
+export default Question;

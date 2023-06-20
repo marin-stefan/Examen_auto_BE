@@ -15,7 +15,7 @@ export class Database {
         } catch (error) {
             console.error(error)
         }
-    }
+    };
 
     async connect() {
         try {
@@ -28,13 +28,12 @@ export class Database {
         } catch (error) {
             console.error(error.message);
         }
-    }
+    };
 
     async close() {
         await this.connection.close();
     } catch (error) {
         console.log(error.message);
-
-    }
+    };
 }
 

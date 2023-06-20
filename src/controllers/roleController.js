@@ -10,15 +10,15 @@ const RoleController = {
             });
 
             if (null === role) {
+
                 return res.status(HttpStatuses.NotFound).send(`Role with ${req.body.name} not found`)
             }
-
             res.status(HttpStatuses.Ok).json(role);
         } catch (error) {
             logger.error(error.message);
             res.status(HttpStatuses.ServerError).json({ message: error.message });
         }
-    }
+    },
 }
 
 export default RoleController;

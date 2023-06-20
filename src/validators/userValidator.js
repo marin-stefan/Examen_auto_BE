@@ -10,14 +10,14 @@ const userValidator = {
                 .withMessage('Firstname is required')
                 .trim()
                 .notEmpty()
-                .isLength({min: 2, max: 15})
+                .isLength({ min: 2, max: 15 })
                 .withMessage('Firstname`s length must be between 2 and 15 characters long.'),
 
             check('lastName',)
                 .exists()
                 .withMessage('Lastname is required')
                 .trim()
-                .isLength({min: 2, max: 15})
+                .isLength({ min: 2, max: 15 })
                 .withMessage('Latstname`s length must be between 2 and 15 characters long.'),
 
             check('email',)
@@ -37,14 +37,14 @@ const userValidator = {
                 .exists()
                 .withMessage('Password is required')
                 .trim()
-                .isLength({min: 8})
+                .isLength({ min: 8 })
                 .withMessage('Password must be at least 8 characters long.'),
 
             check('username',)
                 .exists()
                 .withMessage('Username is required')
                 .trim()
-                .isLength({min: 4, max: 15})
+                .isLength({ min: 4, max: 15 })
                 .withMessage('Usertname`s length must be between 4 and 15 characters long.')
                 .custom(async username => {
                     await userSchema.findOne({ username: username })
@@ -75,7 +75,7 @@ const userValidator = {
                 .trim()
                 .notEmpty()
                 .withMessage('FirstName can not be empty')
-                .isLength({min: 2, max: 15})
+                .isLength({ min: 2, max: 15 })
                 .withMessage('Firstname`s length must be between 2 and 15 characters long.'),
 
             check('lastName',)
@@ -83,7 +83,7 @@ const userValidator = {
                 .trim()
                 .notEmpty()
                 .withMessage('Lastname can not be empty')
-                .isLength({min: 2, max: 15})
+                .isLength({ min: 2, max: 15 })
                 .withMessage('Lastname`s length must be between 2 and 15 characters long.'),
 
             check('email',)
@@ -103,7 +103,7 @@ const userValidator = {
                 .trim()
                 .notEmpty()
                 .withMessage('Username can not be empty')
-                .isLength({min: 4, max: 15})
+                .isLength({ min: 4, max: 15 })
                 .withMessage('Username`s length must be between 4 and 15 characters long.')
                 .custom(async username => {
                     await userSchema.find({ username: username })

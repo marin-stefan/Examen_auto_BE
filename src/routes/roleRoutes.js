@@ -8,7 +8,7 @@ import validate from "../validators/validator.js";
 const app = express();
 
 app.post('/get-role-by-name', isAuth, roleValidator.getNameRequest(), validate, async (req, res) => {
-    await RoleController.getRoleByName(req, res)
-})
+    await RoleController.getRoleByName(req, res);
+});
 
-export default app
+export default app;

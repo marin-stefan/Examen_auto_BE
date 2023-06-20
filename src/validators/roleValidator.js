@@ -1,4 +1,4 @@
-import {check} from "express-validator";
+import { check } from "express-validator";
 import UserRolesEnum from "../enums/userRolesEnum.js";
 
 const roleValidator = {
@@ -17,4 +17,4 @@ const roleValidator = {
     }
 }
 
-export default roleValidator
+export default roleValidator;

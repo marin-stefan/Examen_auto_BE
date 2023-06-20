@@ -59,16 +59,13 @@ const userSchema = mongoose.Schema({
         }
 
     },
+
     {
         toJSON: { virtuals: true },
         toObject: { virtuals: false },
         timeStamps: true         
     }
 )
-
-
-
-
 
 userSchema.plugin(bcrypt, {
     fields: ['password'],
@@ -84,4 +81,4 @@ userSchema.virtual('type', {
 
 const User = mongoose.model('User', userSchema);
 
-export default User
+export default User;
