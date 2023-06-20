@@ -5,7 +5,6 @@ const config = process.env;
 
 const isAuth = (req, res, next) => {
     const token = req.headers.authorization;
-    console.log("thisis+ "+config)
 
     if (!token) {
         return res.status(HttpStatuses.Forbidden).json({ message: "A token is required for authentication" })
